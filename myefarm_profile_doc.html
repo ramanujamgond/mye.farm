@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myefarm - Company Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2d5a2d 0%, #4a7c59 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="20"><circle cx="10" cy="10" r="1" fill="white" opacity="0.1"/><circle cx="30" cy="5" r="0.5" fill="white" opacity="0.1"/><circle cx="60" cy="15" r="1.5" fill="white" opacity="0.1"/><circle cx="80" cy="8" r="0.8" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="20" fill="url(%23grain)"/></svg>') repeat;
+        }
+        
+        .company-name {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            font-style: italic;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: #2d5a2d;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #68d391;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #2d5a2d;
+        }
+        
+        .section-content {
+            font-size: 16px;
+            text-align: justify;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        
+        .image-gallery {
+            margin-top: 60px;
+        }
+        
+        .gallery-title {
+            font-size: 32px;
+            color: #2d5a2d;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .image-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid #68d391;
+        }
+        
+        .image-caption {
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #718096;
+            background: #f7fafc;
+        }
+        
+        .farmer-spotlight {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 5px solid #2d5a2d;
+        }
+        
+        .farmer-spotlight h3 {
+            color: #2d5a2d;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid #68d391;
+            text-align: center;
+        }
+        
+        .value-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .value-title {
+            font-size: 20px;
+            color: #2d5a2d;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .download-section {
+            background: #2d5a2d;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .download-btn {
+            background: #68d391;
+            color: #2d5a2d;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .download-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .company-name {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .download-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="company-name">Myefarm</div>
+            <div class="tagline">Connecting Farms to Families | Sustainable Agriculture for a Better Tomorrow</div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">Our Mission</h2>
+                <div class="section-content">
+                    At Myefarm, our mission is to reconnect people with safe, authentic, and responsibly produced food while supporting farmers and building a healthier planet. We focus on bringing indigenous, seasonal, and chemical-free products directly from farms to consumers, ensuring fair value for both producers and customers.
+                </div>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="value-icon">🌱</span>
+                    <div class="value-title">Sustainability</div>
+                    <p>Promoting eco-friendly farming practices and reducing chemical dependency</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🌍</span>
+                    <div class="value-title">Environmental Care</div>
+                    <p>Protecting natural ecosystems through conscious sourcing</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">♻️</span>
+                    <div class="value-title">Zero Waste</div>
+                    <p>Reducing pollution through direct farm-to-consumer delivery</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Commitment to Sustainability</h2>
+                <div class="section-content">
+                    Myefarm promotes sustainable agriculture by encouraging eco-friendly farming practices, reducing chemical dependency, and supporting crop diversity. By prioritizing local and seasonal produce, we help minimize resource waste and ensure long-term soil health.
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Environmental Responsibility</h2>
+                <div class="section-content">
+                    We are dedicated to protecting natural ecosystems through conscious sourcing and post-harvest management. Our packaging choices emphasize eco-friendly materials, reducing plastic use and encouraging recyclable or biodegradable alternatives. By supporting farmers in adopting environment-friendly methods, we directly contribute to conserving biodiversity and natural resources.
+                </div>
+            </div>
+            
+            <div class="farmer-spotlight">
+                <h3>Meet Our Farmers</h3>
+                <p>We work directly with dedicated farmers like Pramod Jena from Odisha, who brings traditional wisdom and sustainable practices to modern agriculture. Our farmers are not just suppliers—they're partners in our mission to deliver authentic, chemical-free food to your table.</p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Pollution Reduction</h2>
+                <div class="section-content">
+                    Myefarm actively works to lower pollution in the food supply chain. By reducing middlemen and transporting products directly from farms, we cut down unnecessary carbon emissions. Our emphasis on clean, chemical-free food also helps reduce soil and water pollution, while promoting organic waste management and composting practices in farming communities.
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Why It Matters</h2>
+                <div class="section-content">
+                    Through every step—farming, packaging, and distribution—Myefarm aligns its efforts with sustainability, environmental protection, and pollution reduction. We believe responsible food practices are not just about what we eat, but also about how it impacts the earth and future generations.
+                </div>
+            </div>
+            
+            <div class="image-gallery">
+                <h2 class="gallery-title">Our Journey in Pictures</h2>
+                
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="./myefram9.jpg" alt="Farmer Partnership Tags">
+                        <div class="image-caption">Nurturing the land with love – connecting farmers directly to your plate.</div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="./myefram8.jpg" alt="Farm Visits">
+                        <div class="image-caption">Empowering farmers, building sustainable futures together.</div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="./myefram7.jpg" alt="Farmers in Fields">
+                        <div class="image-caption">Personal connection with our farmers through detailed product tags.</div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="./myefram6.jpg" alt="Sustainable Packaging">
+                        <div class="image-caption">Honoring the wisdom of our farmers – stories rooted in Odisha’s soil.</div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="./myefram5.jpg" alt="Product Storage">
+                        <div class="image-caption">Community-driven farming – bridging tradition with modern awareness.</div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="./myefram4.jpg" alt="Quality Grains">
+                        <div class="image-caption">Standing tall with our farmers – guardians of indigenous food.</div>
+                    </div>
+
+                    <div class="image-item">
+                        <img src="./myefram1.jpg" alt="Quality Grains">
+                        <div class="image-caption">From field to family – authentic food with a human touch.</div>
+                    </div>
+
+                    <div class="image-item">
+                        <img src="./myefram2.jpg" alt="Quality Grains">
+                        <div class="image-caption">Every grain tells a story of care, hard work, and tradition.</div>
+                    </div>
+
+                    <div class="image-item">
+                        <img src="./myefram3.jpg" alt="Quality Grains">
+                        <div class="image-caption">Sustainably packed, consciously delivered – food with responsibility.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h3 style="margin-bottom: 10px; font-size: 24px;">mye.farm</h3>
+            <p style="margin-bottom: 5px; opacity: 0.9;">Grow your own</p>
+            <p style="margin-bottom: 5px; opacity: 0.9;">getmyefarm@gmail.com</p>
+        </div>
+    </div>
+</body>
+</html>
